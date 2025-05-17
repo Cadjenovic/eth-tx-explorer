@@ -1,5 +1,11 @@
+import "./styles/main.css";
+
 function App() {
-    return <h1>Hi</h1>;
+    return (
+        <div className='container'>
+            <h1>Ethereum Transaction Explorer</h1>
+        </div>
+    );
 }
 
 export default App;
