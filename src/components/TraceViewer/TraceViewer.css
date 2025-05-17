@@ -1,0 +1,48 @@
+.trace-viewer {
+  margin-top: 2rem;
+}
+
+.trace-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trace-step {
+  padding: 0.5rem;
+  border-left: 3px solid #ccc;
+  margin-bottom: 0.5rem;
+  background-color: #f9f9f9;
+  font-family: monospace;
+  transition: background 0.2s;
+}
+
+.trace-step:hover {
+  background-color: #eaeaea;
+}
+
+.trace-gas {
+  color: #555;
+  margin-left: 10px;
+}
+
+.trace-result {
+  margin-left: 10px;
+  color: #2c7;
+}
+
+.trace-type-call {
+  border-color: #4e6ef2;
+}
+.trace-type-sstore {
+  border-color: #f39c12;
+}
+.trace-type-log {
+  border-color: #16a085;
+}
+.trace-type-return {
+  border-color: #2ecc71;
+}
+.trace-type-revert {
+  border-color: #e74c3c;
+}

@@ -1,0 +1,32 @@
+.tx-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.tx-form label {
+  font-weight: bold;
+}
+
+.tx-form input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.tx-form button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #4e6ef2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.tx-form button:hover {
+  background-color: #3c58d1;
+}
