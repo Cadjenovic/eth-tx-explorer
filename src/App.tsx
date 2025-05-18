@@ -1,52 +1,31 @@
-import "./styles/main.css";
-import TransactionForm from "./components/TransactionForm/TransactionForm";
-import { useState } from "react";
-import { useTransactionData } from "./hooks/useTransactionData";
-import TraceViewer from "./components/TraceViewer/TraceViewer";
-import traceMock from "./mock/trace";
+import Explore from "./sections/Explore";
+import Trace from "./sections/Trace";
+import Gas from "./sections/Gas";
+import Navbar from "./components/Navbar/Navbar";
+import { useRef, useState } from "react";
+import "./index.css";
 
 function App() {
-    const [selectedHash, setSelectedHash] = useState<string | null>(null);
-    const { data, loading, error } = useTransactionData(selectedHash);
+    const [hash, setHash] = useState<string>("");
 
-    const onTransactionSubmit = (hash: string) => {
-        setSelectedHash(hash);
-    };
+    const exploreRef = useRef<HTMLDivElement>(null);
+    const traceRef = useRef<HTMLDivElement>(null);
+    const gasRef = useRef<HTMLDivElement>(null);
 
     return (
         <div className='container'>
-            <h1>Ethereum Transaction Explorer</h1>
-            <TransactionForm onSubmit={onTransactionSubmit} />
+            <Navbar />
+            <div ref={exploreRef} id='explore'>
+                <Explore hash={hash} setHash={setHash} />
+            </div>
 
-            {loading && <p>Loading transaction...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {data && (
-                <div className='card'>
-                    <p>
-                        <strong>Hash:</strong> {data.hash}
-                    </p>
-                    <p>
-                        <strong>From:</strong> {data.from}
-                    </p>
-                    <p>
-                        <strong>To:</strong> {data.to}
-                    </p>
-                    <p>
-                        <strong>Value:</strong> {data.value}
-                    </p>
-                    <p>
-                        <strong>Gas:</strong> {data.gas}
-                    </p>
-                    <p>
-                        <strong>Gas Price:</strong> {data.gasPrice}
-                    </p>
-                    <p>
-                        <strong>Block Number:</strong> {data.blockNumber}
-                    </p>
-                </div>
-            )}
+            <div ref={traceRef} id='trace'>
+                <Trace hash={hash} />
+            </div>
 
-            <TraceViewer trace={traceMock} />
+            <div ref={gasRef} id='gas'>
+                <Gas hash={hash} />
+            </div>
         </div>
     );
 }

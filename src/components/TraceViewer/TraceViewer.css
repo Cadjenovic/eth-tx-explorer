@@ -15,6 +15,13 @@
   background-color: #f9f9f9;
   font-family: monospace;
   transition: background 0.2s;
+  cursor: pointer;
+  color: #222;
+}
+
+.trace-step.active {
+  background-color: #dfe8ff;
+  border-left-color: #4e6ef2;
 }
 
 .trace-step:hover {
@@ -45,4 +52,13 @@
 }
 .trace-type-revert {
   border-color: #e74c3c;
+}
+
+.trace-details {
+  background: #f1f1f1;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid;
 }

@@ -8,6 +8,7 @@ interface TransactionData {
     gas: string;
     gasPrice: string;
     blockNumber: string;
+    gasUsed?: string;
 }
 
 const ETHERSCAN_BASE_URL = "https://api.etherscan.io/api";
@@ -27,24 +28,36 @@ export function useTransactionData(hash: string | null) {
             setData(null);
 
             try {
-                const url = `${ETHERSCAN_BASE_URL}?module=proxy&action=eth_getTransactionByHash&txhash=${hash}&apikey=${API_KEY}`;
-                const res = await fetch(url);
-                const json = await res.json();
+                const txUrl = `${ETHERSCAN_BASE_URL}?module=proxy&action=eth_getTransactionByHash&txhash=${hash}&apikey=${API_KEY}`;
+                const receiptUrl = `${ETHERSCAN_BASE_URL}?module=proxy&action=eth_getTransactionReceipt&txhash=${hash}&apikey=${API_KEY}`;
 
-                if (!json.result) {
+                const [txRes, receiptRes] = await Promise.all([
+                    fetch(txUrl),
+                    fetch(receiptUrl)
+                ]);
+
+                const [txJson, receiptJson] = await Promise.all([
+                    txRes.json(),
+                    receiptRes.json()
+                ]);
+
+                if (!txJson.result) {
                     throw new Error("Transaction not found");
                 }
 
-                const tx = json.result;
+                if (!receiptJson.result) {
+                    throw new Error("Receipt not found");
+                }
 
                 const parsed: TransactionData = {
-                    hash: tx.hash,
-                    from: tx.from,
-                    to: tx.to,
-                    value: parseInt(tx.value, 16) / 1e18 + " ETH",
-                    gas: parseInt(tx.gas, 16).toString(),
-                    gasPrice: parseInt(tx.gasPrice, 16) / 1e9 + " Gwei",
-                    blockNumber: parseInt(tx.blockNumber, 16).toString()
+                    hash: txJson.hash,
+                    from: txJson.from,
+                    to: txJson.to,
+                    value: parseInt(txJson.value, 16) / 1e18 + " ETH",
+                    gas: parseInt(txJson.gas, 16).toString(),
+                    gasPrice: parseInt(txJson.gasPrice, 16) / 1e9 + " Gwei",
+                    blockNumber: parseInt(txJson.blockNumber, 16).toString(),
+                    gasUsed: parseInt(receiptJson.result.gasUsed, 16).toString()
                 };
 
                 setData(parsed);
