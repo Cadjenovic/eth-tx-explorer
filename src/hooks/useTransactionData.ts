@@ -50,13 +50,17 @@ export function useTransactionData(hash: string | null) {
                 }
 
                 const parsed: TransactionData = {
-                    hash: txJson.hash,
-                    from: txJson.from,
-                    to: txJson.to,
-                    value: parseInt(txJson.value, 16) / 1e18 + " ETH",
-                    gas: parseInt(txJson.gas, 16).toString(),
-                    gasPrice: parseInt(txJson.gasPrice, 16) / 1e9 + " Gwei",
-                    blockNumber: parseInt(txJson.blockNumber, 16).toString(),
+                    hash: txJson.result.hash,
+                    from: txJson.result.from,
+                    to: txJson.result.to,
+                    value: parseInt(txJson.result.value, 16) / 1e18 + " ETH",
+                    gas: parseInt(txJson.result.gas, 16).toString(),
+                    gasPrice:
+                        parseInt(txJson.result.gasPrice, 16) / 1e9 + " Gwei",
+                    blockNumber: parseInt(
+                        txJson.result.blockNumber,
+                        16
+                    ).toString(),
                     gasUsed: parseInt(receiptJson.result.gasUsed, 16).toString()
                 };
 

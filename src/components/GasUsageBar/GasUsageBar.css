@@ -1,0 +1,42 @@
+.gas-bar-wrapper {
+  margin-top: 1rem;
+}
+
+.gas-bar {
+  height: 16px;
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.gas-bar-fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.gas-bar-label {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
+}
+
+.gas-status-low {
+    background-color: rgb(125, 248, 125);
+}
+
+.gas-status-medium {
+    background-color: rgb(243, 243, 97);
+}
+
+.gas-status-high {
+    background-color: rgb(240, 85, 85);
+}
+
+body[data-theme="dark"] .gas-bar {
+  background-color: #333;
+}
+
+body[data-theme="dark"] .gas-bar-label {
+  color: #aaa;
+}

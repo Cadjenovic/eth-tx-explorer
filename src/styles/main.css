@@ -79,3 +79,11 @@ body[data-theme="dark"] button {
   padding: 1rem;
   border-bottom: 1px solid gray;
 }
+
+.charts-container {
+  display: flex;
+}
+
+.chart-container {
+  flex: 1;
+}
