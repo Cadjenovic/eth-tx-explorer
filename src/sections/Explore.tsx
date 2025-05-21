@@ -1,47 +1,50 @@
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import TransactionForm from "../components/TransactionForm/TransactionForm";
-import { useTransactionData } from "../hooks/useTransactionData";
+import type { TransactionData } from "../types/TransactionData";
 
 interface ExploreProps {
-    hash: string;
+    txData: {
+        data: TransactionData | null;
+        loading: boolean;
+        error: string | null;
+    };
     setHash: (hash: string) => void;
 }
 
-const Explore = ({ hash, setHash }: ExploreProps) => {
-    const { data, loading, error } = useTransactionData(hash);
-
+const Explore = ({ txData, setHash }: ExploreProps) => {
     return (
-        <section className='section-container'>
+        <>
             <h2>Explore Transaction</h2>
             <TransactionForm onSubmit={setHash} />
 
-            {loading && <p>Loading transaction...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {data && (
+            {txData.loading && <LoadingSpinner text='Transaction' />}
+            {txData.error && <p style={{ color: "red" }}>{txData.error}</p>}
+            {txData.data && (
                 <div className='card'>
                     <p>
-                        <strong>Hash:</strong> {data.hash}
+                        <strong>Hash:</strong> {txData.data.hash}
                     </p>
                     <p>
-                        <strong>From:</strong> {data.from}
+                        <strong>From:</strong> {txData.data.from}
                     </p>
                     <p>
-                        <strong>To:</strong> {data.to}
+                        <strong>To:</strong> {txData.data.to}
                     </p>
                     <p>
-                        <strong>Value:</strong> {data.value}
+                        <strong>Value:</strong> {txData.data.value}
                     </p>
                     <p>
-                        <strong>Gas:</strong> {data.gas}
+                        <strong>Gas:</strong> {txData.data.gas}
                     </p>
                     <p>
-                        <strong>Gas Price:</strong> {data.gasPrice}
+                        <strong>Gas Price:</strong> {txData.data.gasPrice}
                     </p>
                     <p>
-                        <strong>Block Number:</strong> {data.blockNumber}
+                        <strong>Block Number:</strong> {txData.data.blockNumber}
                     </p>
                 </div>
             )}
-        </section>
+        </>
     );
 };
 

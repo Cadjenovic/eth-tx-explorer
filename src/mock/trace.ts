@@ -2,30 +2,30 @@ import type { TraceStep } from "../components/TraceViewer/TraceViewer";
 
 export default [
     {
-        type: "CALL",
+        call_type: "CALL",
         contract: "ContractA",
         functionName: "start",
         depth: 0,
         gasUsed: 30000
     },
     {
-        type: "CALL",
+        call_type: "CALL",
         contract: "ContractB",
         functionName: "doWork",
         depth: 1,
         gasUsed: 15000
     },
-    { type: "SSTORE", contract: "ContractB", depth: 1, gasUsed: 1200 },
+    { call_type: "SSTORE", contract: "ContractB", depth: 1, gasUsed: 1200 },
     {
-        type: "RETURN",
+        call_type: "RETURN",
         contract: "ContractB",
         depth: 1,
         gasUsed: 0,
         result: "success"
     },
-    { type: "LOG", contract: "ContractA", depth: 0, gasUsed: 900 },
+    { call_type: "LOG", contract: "ContractA", depth: 0, gasUsed: 900 },
     {
-        type: "RETURN",
+        call_type: "RETURN",
         contract: "ContractA",
         depth: 0,
         gasUsed: 0,

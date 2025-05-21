@@ -76,7 +76,7 @@ body[data-theme="dark"] button {
   flex-direction: column;
   justify-content: center;
   min-height: 500px;
-  padding: 1rem;
+  padding: 3rem;
   border-bottom: 1px solid gray;
 }
 

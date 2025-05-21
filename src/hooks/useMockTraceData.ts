@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { TraceStep } from "../components/TraceViewer/TraceViewer";
 import traceMock from "../mock/trace";
+import { delay } from "../utils/utils";
+import type { TraceStep } from "../types/TraceStep";
 
 export function useMockTraceData(hash: string | null) {
     const [trace, setTrace] = useState<TraceStep[] | null>(null);
@@ -16,9 +17,9 @@ export function useMockTraceData(hash: string | null) {
             setTrace(null);
 
             try {
-                const mockTrace: TraceStep[] = traceMock;
+                await delay(5000);
 
-                setTrace(mockTrace);
+                setTrace(traceMock);
             } catch (err) {
                 setError("Trace failed to load.");
             } finally {

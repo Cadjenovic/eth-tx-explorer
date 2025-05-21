@@ -17,14 +17,16 @@ const GasUsageBar = ({ gasUsed, gasLimit }: GasUsageBarProps) => {
     return (
         <div className='gas-bar-wrapper'>
             <h3>Gas Total Utilization</h3>
-            <div className='gas-bar'>
-                <div
-                    className={`gas-bar-fill gas-status-${status}`}
-                    style={{ width: `${percent}%` }}
-                />
-            </div>
-            <div className='gas-bar-label'>
-                {gasUsed} / {gasLimit} gas ({percent.toFixed(1)}%)
+            <div className='gas-info'>
+                <div className='gas-bar'>
+                    <div
+                        className={`gas-bar-fill gas-status-${status}`}
+                        style={{ width: `${percent}%` }}
+                    />
+                </div>
+                <div className='gas-bar-label'>
+                    {gasUsed} / {gasLimit} gas ({percent.toFixed(1)}%)
+                </div>
             </div>
         </div>
     );

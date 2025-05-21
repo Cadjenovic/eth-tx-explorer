@@ -1,25 +1,24 @@
-import { useState } from "react";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import TraceViewer from "../components/TraceViewer/TraceViewer";
-import { useMockTraceData } from "../hooks/useMockTraceData";
-import TransactionForm from "../components/TransactionForm/TransactionForm";
+import type { TraceStep } from "../types/TraceStep";
 
 interface TraceProps {
-    hash: string;
+    traceData: {
+        trace: TraceStep[] | null;
+        loading: boolean;
+        error: string | null;
+    };
 }
 
-const Trace = ({ hash }: TraceProps) => {
-    const {
-        trace,
-        loading: traceLoading,
-        error: traceError
-    } = useMockTraceData(hash);
-
+const Trace = ({ traceData }: TraceProps) => {
     return (
-        <section className='section-container'>
-            {traceLoading && <p>Loading trace...</p>}
-            {traceError && <p style={{ color: "red" }}>{traceError}</p>}
-            {trace && <TraceViewer trace={trace} />}
-        </section>
+        <>
+            {traceData.loading && <LoadingSpinner text='Trace' />}
+            {traceData.error && (
+                <p style={{ color: "red" }}>{traceData.error}</p>
+            )}
+            {traceData.trace && <TraceViewer trace={traceData.trace} />}
+        </>
     );
 };
 

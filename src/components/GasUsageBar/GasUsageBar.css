@@ -1,5 +1,9 @@
 .gas-bar-wrapper {
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .gas-bar {
@@ -39,4 +43,11 @@ body[data-theme="dark"] .gas-bar {
 
 body[data-theme="dark"] .gas-bar-label {
   color: #aaa;
+}
+
+.gas-info {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  margin-top: 40%;
 }

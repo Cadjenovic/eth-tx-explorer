@@ -1,22 +1,7 @@
 import { useState } from "react";
 import "./TraceViewer.css";
 import { useScrollToActiveTrace } from "../../hooks/useScrollToActiveTrace";
-
-export interface TraceStep {
-    type:
-        | "CALL"
-        | "DELEGATECALL"
-        | "SSTORE"
-        | "SLOAD"
-        | "LOG"
-        | "RETURN"
-        | "REVERT";
-    contract: string;
-    functionName?: string;
-    depth: number;
-    gasUsed: number;
-    result?: string;
-}
+import type { TraceStep } from "../../types/TraceStep";
 
 interface TraceViewerProps {
     trace: TraceStep[];
@@ -41,11 +26,11 @@ const TraceViewer = ({ trace }: TraceViewerProps) => {
                             ref={(el: HTMLLIElement | null) => {
                                 itemRefs.current[index] = el;
                             }}
-                            className={`trace-step trace-type-${step.type.toLowerCase()}`}
+                            className={`trace-step trace-type-${step.call_type?.toLowerCase()}`}
                             style={{ marginLeft: `${step.depth * 20}px` }}
                             onClick={() => handleClick(index)}
                         >
-                            <strong>{step.type}</strong> →{" "}
+                            <strong>{step.call_type}</strong> →{" "}
                             <code>{step.contract}</code>
                             {step.functionName && `.${step.functionName}()`}
                             <span className='trace-gas'>
@@ -74,7 +59,7 @@ const TraceViewer = ({ trace }: TraceViewerProps) => {
                                     {step.functionName || "—"}
                                 </p>
                                 <p>
-                                    <strong>Type:</strong> {step.type}
+                                    <strong>Type:</strong> {step.call_type}
                                 </p>
                                 <p>
                                     <strong>Gas Used:</strong> {step.gasUsed}
