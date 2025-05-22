@@ -1,4 +1,4 @@
-import type { TraceStep } from "../components/TraceViewer/TraceViewer";
+import type { TraceStep } from "../types/TraceStep";
 
 export default [
     {
